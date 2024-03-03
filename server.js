@@ -5,7 +5,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const dbConfig = require('./config/database.config.js');
-console.log('db dbConfig >>>', dbConfig);
 
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
