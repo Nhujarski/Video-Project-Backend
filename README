@@ -1,0 +1,33 @@
+# Project Title
+
+Video-Project
+
+## Overview
+
+Allows users to login and enjoy a video. uses as Node.js, Express, MongoDB and Mongoose.
+
+## Prerequisites
+
+List any prerequisites or dependencies that users need to have installed before they can use your project. Include links to relevant documentation or installation guides.
+
+- [Node.js](https://nodejs.org/)
+- [MongoDB](https://www.mongodb.com/)
+- ...
+
+## Installation
+
+Provide step-by-step instructions on how to install and set up your project locally. Include any environment variable setup, configuration files, or database setup needed.
+
+````bash
+# Clone the repository
+git clone https://github.com/Nhujarski/Video-Project-Backend
+
+
+# Install dependencies
+npm install
+``` node modules
+````
+
+## To run
+
+node server.js
