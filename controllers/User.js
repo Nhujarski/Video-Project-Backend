@@ -27,12 +27,30 @@ exports.create = async (req, res) => {
     });
 };
 
-// find user with an id for login
+// find user with an userName and password for login
 exports.findOne = async (req, res) => {
+  const { userName, password } = req.body;
+
   try {
-    const user = await UserModel.findById(req.params.id);
-    res.status(200).json(user);
+    const user = await UserModel.findOne({ userName });
+
+    if (user) {
+      console.log({ user });
+      // Check if the provided password matches the stored password
+      const isPasswordValid = await user.comparePassword(password);
+
+      if (isPasswordValid) {
+        // Exclude sensitive information like the password before sending the response
+        const { password, ...userWithoutPassword } = user.toObject();
+
+        res.status(200).json(userWithoutPassword);
+      } else {
+        res.status(401).json({ message: 'Invalid password' });
+      }
+    } else {
+      res.status(404).json({ message: 'User not found' });
+    }
   } catch (error) {
-    res.status(404).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
