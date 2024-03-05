@@ -32,5 +32,29 @@ var schema = new mongoose.Schema({
   },
 });
 
+// Hash the password before saving to the database
+schema.pre('save', async function (next) {
+  try {
+    // Only hash the password if it is modified or new
+    if (this.isModified('password') || this.isNew) {
+      const saltRounds = 10;
+      const hashedPassword = await bcrypt.hash(this.password, saltRounds);
+      this.password = hashedPassword;
+    }
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Add a method to compare passwords
+schema.methods.comparePassword = async function (candidatePassword) {
+  try {
+    return await bcrypt.compare(candidatePassword, this.password);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 var user = new mongoose.model('User', schema);
 module.exports = user;

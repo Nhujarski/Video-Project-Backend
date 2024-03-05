@@ -35,7 +35,6 @@ exports.findOne = async (req, res) => {
     const user = await UserModel.findOne({ userName });
 
     if (user) {
-      console.log({ user });
       // Check if the provided password matches the stored password
       const isPasswordValid = await user.comparePassword(password);
 
