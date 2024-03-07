@@ -1,6 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+
+const cors = require('cors');
+const corsOptions = {
+  origin: 'http://localhost:3000', // use this if local host errors out -> 'http://roberts-13-inch-macbook-pro.local:3000',
+  optionsSuccessStatus: 200, // Some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
 const app = express();
+app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
